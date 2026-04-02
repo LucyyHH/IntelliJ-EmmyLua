@@ -91,15 +91,14 @@ QQ交流群：1群：`29850775` 2群：`529914962`
 
 ## Build environment requirements
 
-- JDK 11
+- JDK 21
 - Setup environment variables as following:
 
-        JAVA_HOME="path to JDK 11"
-        IDEA_HOME_203="path to IDEA 203+"
+        JAVA_HOME="path to JDK 21"
         
 ## Building
 
-  `./gradlew buildPlugin -DIDEA_VER=203`
+  `./gradlew buildPlugin -DIDEA_VER=2026.1`
 
 ## Developed By
 

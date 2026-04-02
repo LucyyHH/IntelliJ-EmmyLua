@@ -21,8 +21,8 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.io.ByteArrayOutputStream
 
 plugins {
-    id("org.jetbrains.intellij.platform") version "2.7.0"
-    id("org.jetbrains.kotlin.jvm").version("2.1.0")
+    id("org.jetbrains.intellij.platform") version "2.10.0"
+    id("org.jetbrains.kotlin.jvm").version("2.3.20")
     id("de.undercouch.download").version("5.3.0")
 }
 
@@ -43,17 +43,19 @@ data class BuildData(
 
 val buildDataList = listOf(
     BuildData(
-        ideaSDKShortVersion = "2025.3",
-        ideaSDKVersion = "253.28086.51",
-        sinceBuild = "253",
-        untilBuild = "253.*",
+        ideaSDKShortVersion = "2026.1",
+        ideaSDKVersion = "261.22158.335",
+        sinceBuild = "261",
+        untilBuild = "261.*",
         bunch = "212",
         targetCompatibilityLevel = JavaVersion.VERSION_21,
         jvmTarget = "21"
     )
 )
 
-val buildVersion = System.getProperty("IDEA_VER") ?: buildDataList.first().ideaSDKShortVersion
+val buildVersion = System.getProperty("IDEA_VER")
+    ?: System.getenv("IDEA_VER")
+    ?: buildDataList.first().ideaSDKShortVersion
 
 val buildVersionData = buildDataList.find { it.ideaSDKShortVersion == buildVersion }!!
 
@@ -164,7 +166,7 @@ project(":") {
         implementation("org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5")
         implementation("com.jgoodies:forms:1.2.1")
         intellijPlatform {
-            intellijIdeaUltimate(buildVersionData.ideaSDKVersion)
+            intellijIdea(buildVersionData.ideaSDKShortVersion)
             bundledModule("intellij.spellchecker")
         }
     }
